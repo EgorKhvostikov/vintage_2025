@@ -964,9 +964,9 @@ Known issues:
  * Includes fix to avoid deadlock situation with WatchdogMonitor which could result in USB communication errors.
      - Comm error appeared to require that user disconnect USB cable and restart the Robot Controller app to recover.
      - robotControllerLog.txt would have error messages that included the words "E RobotCore: lynx xmit lock: #### abandoning lock:"
- * Includes fix to correctly list the parent module address for a REV Robotics Expansion Hub in a configuration (.xml) file.
-     - Bug in versions 4.0 and 4.1 would incorrect list the address module for a parent REV Robotics device as "1".
-     - If the parent module had a higher address value than the daisy-chained module, then this bug would prevent the Robot Controller from communicating with the downstream Expansion Hub.
+ * Includes fix to correctly list the parent eventUser address for a REV Robotics Expansion Hub in a configuration (.xml) file.
+     - Bug in versions 4.0 and 4.1 would incorrect list the address eventUser for a parent REV Robotics device as "1".
+     - If the parent eventUser had a higher address value than the daisy-chained eventUser, then this bug would prevent the Robot Controller from communicating with the downstream Expansion Hub.
  * Added requirement for ACCESS_COARSE_LOCATION to allow a Driver Station running Android Oreo to scan for Wi-Fi Direct devices.
  * Added google() repo to build.gradle because aapt2 must be downloaded from the google() repository beginning with version 3.2 of the Android Gradle Plugin.
      - Important Note: Android Studio users will need to be connected to the Internet the first time build the ftc_app project.
@@ -1233,7 +1233,7 @@ This software is being released as an "alpha" version.  Use this version at your
 
 This pre-release software contains SIGNIFICANT changes, including changes to the Wi-Fi Direct pairing mechanism, rewrites of the I2C sensor classes, changes to the USB/FTDI layer, and the introduction of support for the REV Robotics Expansion Hub and the REV Robotics color-range-light sensor.  These changes were implemented to improve the reliability and resiliency of the FTC control system.
 
-Please note, however, that version 3.00 is considered "alpha" code.  This code is being released so that the FIRST community will have an opportunity to test the new REV Expansion Hub electronics module when it becomes available in May.  The developers do not recommend using this code for critical applications (i.e., competition use).
+Please note, however, that version 3.00 is considered "alpha" code.  This code is being released so that the FIRST community will have an opportunity to test the new REV Expansion Hub electronics eventUser when it becomes available in May.  The developers do not recommend using this code for critical applications (i.e., competition use).
 
 *** Use this version of the software at YOUR OWN RISK!!! ***
 
@@ -1439,7 +1439,7 @@ Changes include:
  * Inspection function has been integrated into the FTC Robot Controller and Driver Station Apps (Thanks Team HazMat… 9277 & 10650!).
  * Audio cues have been incorporated into FTC SDK.
  * Swap mechanism added to FTC Robot Controller configuration activity.  For example, if you have two motor controllers on a robot, and you misidentified them in your configuration file, you can use the Swap button to swap the devices within the configuration file (so you do not have to manually re-enter in the configuration info for the two devices).
- * Fix mechanism added to all user to replace an electronic module easily.  For example, suppose a servo controller dies on your robot. You replace the broken module with a new module, which has a different serial number from the original servo controller.  You can use the Fix button to automatically reconfigure your configuration file to use the serial number of the new module.
+ * Fix mechanism added to all user to replace an electronic eventUser easily.  For example, suppose a servo controller dies on your robot. You replace the broken eventUser with a new eventUser, which has a different serial number from the original servo controller.  You can use the Fix button to automatically reconfigure your configuration file to use the serial number of the new eventUser.
  * Improvements made to fix resiliency and responsiveness of the system.
  * For LinearOpMode the user now must for a telemetry.update() to update the telemetry data on the driver station.  This update() mechanism ensures that the driver station gets the updated data properly and at the same time.
  * The Auto Configure function of the Robot Controller is now template based.  If there is a commonly used robot configuration, a template can be created so that the Auto Configure mechanism can be used to quickly configure a robot of this type.
@@ -1465,7 +1465,7 @@ Changes include:
     - loop() (for an OpMode) is now decoupled from the system's hardware read/write thread.
     - Methods are synchronous.
     - For example, if you call setMode(DcMotorController.RunMode.RESET_ENCODERS) for a motor, the encoder is guaranteed to be reset when the method call is complete.
-    - For legacy module (NXT compatible), user no longer has to toggle between read and write modes when reading from or writing to a legacy device.
+    - For legacy eventUser (NXT compatible), user no longer has to toggle between read and write modes when reading from or writing to a legacy device.
  * Changes made to enhance reliability/robustness during ESD event.
  * Changes made to make code thread safe.
  * Debug keystore added so that user-generated robot controller APKs will all use the same signed key (to avoid conflicts if a team has multiple developer laptops for example).
@@ -1493,10 +1493,10 @@ Changes include:
 
  * Improved battery checker feature so that voltage values get refreshed regularly (every 250 msec) on Driver Station (DS) user interface.
  * Improved software so that Robot Controller (RC) is much more resilient and “self-healing” to USB disconnects:
-    - If user attempts to start/restart RC with one or more module missing, it will display a warning but still start up.
-    - When running an OpMode, if one or more modules gets disconnected, the RC & DS will display warnings,and robot will keep on working in spite of the missing module(s).
-    - If a disconnected module gets physically reconnected the RC will auto detect the module and the user will regain control of the recently connected module.
-    - Warning messages are more helpful (identifies the type of module that’s missing plus its USB serial number).
+    - If user attempts to start/restart RC with one or more eventUser missing, it will display a warning but still start up.
+    - When running an OpMode, if one or more modules gets disconnected, the RC & DS will display warnings,and robot will keep on working in spite of the missing eventUser(s).
+    - If a disconnected eventUser gets physically reconnected the RC will auto detect the eventUser and the user will regain control of the recently connected eventUser.
+    - Warning messages are more helpful (identifies the type of eventUser that’s missing plus its USB serial number).
  * Code changes to fix the null gamepad reference when users try to reference the gamepads in the init() portion of their OpMode.
  * NXT light sensor output is now properly scaled.  Note that teams might have to readjust their light threshold values in their OpModes.
  * On DS user interface, gamepad icon for a driver will disappear if the matching gamepad is disconnected or if that gamepad gets designated as a different driver.
@@ -1583,7 +1583,7 @@ Changes include:
  * Added support for Legacy Matrix 9.6V motor/servo controller.
  * Cleaned up build.gradle file.
  * Minor UI and bug fixes for driver station and robot controller apps.
- * Throws error if Ultrasonic sensor (NXT) is not configured for legacy module port 4 or 5.
+ * Throws error if Ultrasonic sensor (NXT) is not configured for legacy eventUser port 4 or 5.
 
 
 ## Release 15.08.03.001
