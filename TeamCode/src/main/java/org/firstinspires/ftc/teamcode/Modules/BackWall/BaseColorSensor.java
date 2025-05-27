@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.StateController.OnBaseEventController;
+package org.firstinspires.ftc.teamcode.Modules.BackWall;
 
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 
@@ -10,10 +10,10 @@ import org.firstinspires.ftc.teamcode.MatchData.MatchData;
 import org.firstinspires.ftc.teamcode.Color.Color;
 import org.firstinspires.ftc.teamcode.Modules.Interfaces.IUpdatable;
 
-public class OnBaseEventController implements IUpdatable {
+public class BaseColorSensor implements IUpdatable {
     AdafruitI2cColorSensor baseSensor;
     static {
-        MainUpdater.addModule(OnBaseEventController.class);
+        MainUpdater.getInstance().addModule(BaseColorSensor.class);
     }
     public void init(){
         baseSensor = Hardware.baseSensor;

@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Modules.Interfaces.IUpdatable;
 
 public class Battery implements IUpdatable {
     static {
-        MainUpdater.addModule(Battery.class);
+        MainUpdater.getInstance().addModule(Battery.class);
     }
     VoltageSensor voltageSensor;
 

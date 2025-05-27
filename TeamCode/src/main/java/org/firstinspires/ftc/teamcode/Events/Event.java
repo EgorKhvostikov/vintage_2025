@@ -18,4 +18,5 @@ public class Event<T> {
             i.onEvent(this);
         }
     }
+    
 }

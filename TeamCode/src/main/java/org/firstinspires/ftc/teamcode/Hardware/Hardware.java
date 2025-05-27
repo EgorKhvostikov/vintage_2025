@@ -5,6 +5,8 @@ import static org.firstinspires.ftc.teamcode.Hardware.ColorSensorFix.fix;
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 public class Hardware {
@@ -13,9 +15,8 @@ public class Hardware {
 
     private static void initDriveMotors(HardwareMap map) {
         rightDrive = map.get(DcMotorEx.class, "rightDrive");
-        leftDrive = map.get(DcMotorEx.class, "leftDrive");
+        leftDrive  = map.get(DcMotorEx.class, "leftDrive");
     }
-
 
     public static AdafruitI2cColorSensor baseSensor;
     public static AdafruitI2cColorSensor puckSensor;
@@ -25,11 +26,30 @@ public class Hardware {
         baseSensor = fix(map.get(AdafruitI2cColorSensor.class, "baseSensor"));
     }
 
-
     public static DcMotorEx separatorMotor;
 
     private static void initSeparatorMotor(HardwareMap map){
-        separatorMotor = leftDrive = map.get(DcMotorEx.class, "separatorMotor");
+        separatorMotor = map.get(DcMotorEx.class, "separatorMotor");
+    }
+
+    public static DcMotorEx brushMotor;
+
+    private static void initBrushMotor(HardwareMap map){
+        brushMotor = map.get(DcMotorEx.class, "brushMotor");
+    }
+
+    public static Servo wallServo;
+
+    private static void initWallServo(HardwareMap map){
+        wallServo = map.get(Servo.class, "wallServo");
+    }
+
+    public static TouchSensor rightButton;
+    public static TouchSensor leftButton;
+
+    private static void initButtons(HardwareMap map){
+        rightButton = map.get(TouchSensor.class, "rightButton");
+        leftButton = map.get(TouchSensor.class, "leftButton");
     }
 
     public static VoltageSensor voltageSensor;
@@ -39,10 +59,13 @@ public class Hardware {
     }
 
 
-    public void init(HardwareMap map){
+    public static void init(HardwareMap map){
         initDriveMotors   (map);
         initColorSensor   (map);
         initSeparatorMotor(map);
+        initBrushMotor    (map);
         initVoltageSensor (map);
+        initWallServo     (map);
+        initButtons       (map);
     }
 }

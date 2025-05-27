@@ -20,13 +20,14 @@ public class VoltageController implements EventUser, IUpdatable {
     private Position actualTarget = new Position();
 
     static {
-        MainUpdater.addModule(VoltageController.class);
+        MainUpdater.getInstance().addModule(VoltageController.class);
     }
 
     public void init() {
         rightDrive        = Hardware.rightDrive;
         leftDrive         = Hardware.leftDrive;
-
+        EventManager.getDefault().newVoltageAvailable.subscribe(this);
+        EventManager.getDefault().newTargetVelocity.subscribe(this);
     }
 
     public void setVoltage(double x, double h){
@@ -47,7 +48,7 @@ public class VoltageController implements EventUser, IUpdatable {
     }
 
 
-    public void onEvent(Event e) {
+    public void onEvent(Event<?> e) {
         if(e == EventManager.getDefault().newVoltageAvailable){
             actualVoltage = (Double) e.data;
         }

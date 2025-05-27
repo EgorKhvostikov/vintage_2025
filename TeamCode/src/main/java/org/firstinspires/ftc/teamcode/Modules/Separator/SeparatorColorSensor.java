@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Modules.Interfaces.IUpdatable;
 
 public class SeparatorColorSensor implements IUpdatable{
     static {
-        MainUpdater.addModule(SeparatorColorSensor.class);
+        MainUpdater.getInstance().addModule(SeparatorColorSensor.class);
     }
     AdafruitI2cColorSensor colorSensor;
 
