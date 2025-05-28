@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+import org.firstinspires.ftc.teamcode.Modules.Gyro.Gyro;
+
 public class Hardware {
     public static DcMotorEx rightDrive;
     public static DcMotorEx leftDrive;
@@ -58,6 +60,10 @@ public class Hardware {
         voltageSensor = map.voltageSensor.get("Control Hub");
     }
 
+    public static Gyro gyro;
+    private static void initGyro(HardwareMap map){
+        gyro.init(map);
+    }
 
     public static void init(HardwareMap map){
         initDriveMotors   (map);
@@ -67,5 +73,6 @@ public class Hardware {
         initVoltageSensor (map);
         initWallServo     (map);
         initButtons       (map);
+        initGyro          (map);
     }
 }

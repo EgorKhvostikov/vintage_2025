@@ -18,6 +18,10 @@ public class Pid {
         this.status = status;
     }
 
+    public double getPos() {
+        return pos;
+    }
+
     public String name;
 
     public boolean isAngle = false;

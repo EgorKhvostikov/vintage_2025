@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.Color.ColorState;
 import org.firstinspires.ftc.teamcode.Config.ActiveServiceList;
+import org.firstinspires.ftc.teamcode.Config.PidConfig;
 import org.firstinspires.ftc.teamcode.Config.SeparatorConfig;
 import org.firstinspires.ftc.teamcode.Events.Event;
 import org.firstinspires.ftc.teamcode.Events.EventManager;
@@ -11,13 +12,12 @@ import org.firstinspires.ftc.teamcode.Events.EventUser;
 import org.firstinspires.ftc.teamcode.Hardware.Hardware;
 import org.firstinspires.ftc.teamcode.MainUpdater.MainUpdater;
 import org.firstinspires.ftc.teamcode.Math.Pid.Pid;
-import org.firstinspires.ftc.teamcode.Math.Pid.PidStatus;
 import org.firstinspires.ftc.teamcode.Modules.Interfaces.IUpdatable;
 import org.firstinspires.ftc.teamcode.Telemetry.TelemetryUnit;
 
 public class Separator implements IUpdatable, EventUser {
-    public static PidStatus pidStatus = new PidStatus(0,0,0,0,0,0,0,0,0);
-    private final Pid pid = new Pid(pidStatus);
+
+    private final Pid pid = new Pid(PidConfig.sepatatorPidStatus);
 
     DcMotorEx motor;
 

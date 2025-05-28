@@ -19,6 +19,7 @@ public class BaseColorSensor implements IUpdatable {
         baseSensor = Hardware.baseSensor;
     }
 
+    ColorState oldColorState = ColorState.NONE;
     @Override
     public void update() {
         Color color = Color.getColor(baseSensor.red(),baseSensor.blue(),baseSensor.green());
@@ -34,6 +35,10 @@ public class BaseColorSensor implements IUpdatable {
 
         EventManager.getDefault().nowOnBase.publish(ColorState.OPPONENT);
 
+        if(oldColorState != ColorState.OUR && EventManager.getDefault().nowOnBase.data == ColorState.OUR){
+            EventManager.getDefault().arriveOnBase.publish(true);
+        }
+        oldColorState =  EventManager.getDefault().nowOnBase.data;
     }
 
     

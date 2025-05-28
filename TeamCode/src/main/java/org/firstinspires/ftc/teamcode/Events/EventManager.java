@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Events;
 
 import org.firstinspires.ftc.teamcode.Color.ColorState;
 import org.firstinspires.ftc.teamcode.Math.Position;
+import org.firstinspires.ftc.teamcode.Task.MoveTask;
 import org.firstinspires.ftc.teamcode.Telemetry.TelemetryUnit;
 
 public class EventManager{
@@ -24,4 +25,13 @@ public class EventManager{
     public Event<TelemetryUnit<?>> telemtryEvent = new Event<>();
 
     public Event<Long> mainLoopEnd = new Event<>();
+
+    public Event<MoveTask> newMoveTask = new Event<>();
+
+    public Event<Double> newAngle = new Event<>();
+
+    public Event<Boolean> robotAtAngle = new Event<>();
+
+    public Event<Boolean> wallNear = new Event<>();
+
 }

@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.OpModes.BaseOpMode.BaseopMode;
 
 public class SeparatorTest extends BaseopMode {
     static  {
-        ActiveServiceList.separator = false;
+        ActiveServiceList.autoDriveTrain = false;
     }
     @Override
     public void initDevices() {
