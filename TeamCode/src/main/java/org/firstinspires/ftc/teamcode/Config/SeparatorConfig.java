@@ -4,5 +4,5 @@ import com.acmerobotics.dashboard.config.Config;
 
 @Config
 public class SeparatorConfig {
-    public static double onePuckPositionStep = 750;
+    public static double onePuckPositionStep = 220;
 }

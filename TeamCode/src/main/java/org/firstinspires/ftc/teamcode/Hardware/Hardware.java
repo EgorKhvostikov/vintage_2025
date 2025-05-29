@@ -3,15 +3,18 @@ package org.firstinspires.ftc.teamcode.Hardware;
 import static org.firstinspires.ftc.teamcode.Hardware.ColorSensorFix.fix;
 
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
-import org.firstinspires.ftc.teamcode.Modules.Gyro.Gyro;
 
 public class Hardware {
+    public static HardwareMap hardwareMap;
+
     public static DcMotorEx rightDrive;
     public static DcMotorEx leftDrive;
 
@@ -46,12 +49,12 @@ public class Hardware {
         wallServo = map.get(Servo.class, "wallServo");
     }
 
-    public static TouchSensor rightButton;
-    public static TouchSensor leftButton;
+    public static DigitalChannel rightButton;
+    public static DigitalChannel leftButton;
 
     private static void initButtons(HardwareMap map){
-        rightButton = map.get(TouchSensor.class, "rightButton");
-        leftButton = map.get(TouchSensor.class, "leftButton");
+        rightButton = map.get(DigitalChannel.class, "rightButton");
+        leftButton =  map.get(DigitalChannel.class, "leftButton");
     }
 
     public static VoltageSensor voltageSensor;
@@ -60,12 +63,22 @@ public class Hardware {
         voltageSensor = map.voltageSensor.get("Control Hub");
     }
 
-    public static Gyro gyro;
-    private static void initGyro(HardwareMap map){
-        gyro.init(map);
+    private static void motorsReset(){
+        separatorMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        separatorMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        separatorMotor .setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightDrive   .setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive   .setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
     public static void init(HardwareMap map){
+        hardwareMap = map;
         initDriveMotors   (map);
         initColorSensor   (map);
         initSeparatorMotor(map);
@@ -73,6 +86,6 @@ public class Hardware {
         initVoltageSensor (map);
         initWallServo     (map);
         initButtons       (map);
-        initGyro          (map);
+        motorsReset();
     }
 }

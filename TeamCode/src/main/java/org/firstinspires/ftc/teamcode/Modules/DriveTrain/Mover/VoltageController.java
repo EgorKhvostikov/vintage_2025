@@ -21,7 +21,7 @@ public class VoltageController implements EventUser, IUpdatable {
 
     private Double   actualVoltage = 12.0;
     private Position actualTarget = new Position();
-
+    public static void load(){}
     static {
         MainUpdater.getInstance().addModule(VoltageController.class);
     }
@@ -74,6 +74,6 @@ public class VoltageController implements EventUser, IUpdatable {
         pid.setTarget(actualTarget.h);
         pid.update();
         setVoltage(actualTarget.x, pid.getU());
-        EventManager.getDefault().robotAtAngle.publish (abs( Position.normalizeAngle(pid.getPos()-actualTarget.h) ) > 5 );
+        EventManager.getDefault().robotAtAngle.publish (abs( Position.normalizeAngle(pid.getPos()-actualTarget.h) ) < 5 );
     }
 }

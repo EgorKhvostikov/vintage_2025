@@ -20,7 +20,7 @@ public class EventManager{
     public Event<Double>  newVoltageAvailable = new Event<>();
     public Event<Position> newTargetVelocity  = new Event<>();
 
-    public Event<ColorState> newPuckInSeparator       = new Event<>();
+    public Event<ColorState> newPuckInSeparator = new Event<>();
 
     public Event<TelemetryUnit<?>> telemtryEvent = new Event<>();
 

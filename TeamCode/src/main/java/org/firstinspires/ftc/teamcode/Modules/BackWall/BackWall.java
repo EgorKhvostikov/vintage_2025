@@ -19,6 +19,7 @@ public class BackWall implements EventUser, IUpdatable{
             MainUpdater.getInstance().addModule(BackWall.class);
         }
     }
+    public static void load(){}
 
     private Servo servo;
     @Override

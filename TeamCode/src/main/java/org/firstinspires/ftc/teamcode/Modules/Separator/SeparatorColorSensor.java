@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.Modules.Separator;
 
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 
+import org.firstinspires.ftc.teamcode.Color.ColorMap;
 import org.firstinspires.ftc.teamcode.Color.ColorState;
+import org.firstinspires.ftc.teamcode.Config.ColorSensorConfig;
 import org.firstinspires.ftc.teamcode.Events.Event;
 import org.firstinspires.ftc.teamcode.Events.EventManager;
 import org.firstinspires.ftc.teamcode.Events.EventUser;
@@ -17,7 +19,7 @@ public class SeparatorColorSensor implements IUpdatable{
         MainUpdater.getInstance().addModule(SeparatorColorSensor.class);
     }
     AdafruitI2cColorSensor colorSensor;
-
+    public static void load(){}
     @Override
     public void init(){
         colorSensor = Hardware.puckSensor;
@@ -25,7 +27,19 @@ public class SeparatorColorSensor implements IUpdatable{
 
     @Override
     public void update() {
-        Color color = Color.getColor(colorSensor.red(),colorSensor.blue(),colorSensor.green());
+        ColorMap colorMap = ColorMap.findNearest(
+                new ColorMap(colorSensor.red(),colorSensor.green(),colorSensor.blue()),
+                ColorSensorConfig.puckRedMap,ColorSensorConfig.puckBlueMap,ColorSensorConfig.puckWhiteMap
+        );
+
+        Color color;
+        if(colorMap == ColorSensorConfig.puckBlueMap) {
+            color = Color.BLUE;
+        }else if(colorMap == ColorSensorConfig.puckRedMap) {
+            color = Color.RED;
+        }else {
+            color = Color.WHITE;
+        }
 
         if(color == MatchData.team){
             EventManager.getDefault().newPuckInSeparator.publish(ColorState.OUR);

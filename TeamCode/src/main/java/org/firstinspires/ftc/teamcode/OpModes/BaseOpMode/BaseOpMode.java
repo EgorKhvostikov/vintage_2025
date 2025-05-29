@@ -3,18 +3,24 @@ package org.firstinspires.ftc.teamcode.OpModes.BaseOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Hardware.Hardware;
+import org.firstinspires.ftc.teamcode.MainUpdater.MainClassesLoader;
 import org.firstinspires.ftc.teamcode.MainUpdater.MainUpdater;
 
-public abstract class BaseopMode extends LinearOpMode {
+public abstract class BaseOpMode extends LinearOpMode {
     public abstract void initDevices();
     public abstract void loopCall();
     public abstract void conditionCall();
 
+    private void initClasses(){
+
+    }
+
     private void initOpMode(){
+        MainClassesLoader.loadAll();
         Hardware.init(this.hardwareMap);
         MainUpdater.getInstance().init();
     }
-    protected boolean isNeedToCall = false;
+    protected boolean isNeedToCall = true;
     @Override
     public void runOpMode(){
         initOpMode();
@@ -26,7 +32,7 @@ public abstract class BaseopMode extends LinearOpMode {
                 isNeedToCall = false;
             }
             loopCall();
-            MainUpdater.getInstance().init();
+            MainUpdater.getInstance().update();
         }
     }
 }

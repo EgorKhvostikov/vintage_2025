@@ -17,7 +17,7 @@ public class TaskPushCenter extends MoveTask{
             timer.reset();
         }
         if(timer.seconds()<delay){
-            EventManager.getDefault().newTargetVelocity.publish(new Position(12,0,0));
+            EventManager.getDefault().newTargetVelocity.publish(new Position(5,0,0));
         }else{
             EventManager.getDefault().newMoveTask.publish(new TaskRotate(45,new TaskToWall()));
         }

@@ -1,14 +1,18 @@
 package org.firstinspires.ftc.teamcode.OpModes.ModulesTests;
 
-import org.firstinspires.ftc.teamcode.Config.ActiveServiceList;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+
+import org.firstinspires.ftc.teamcode.Config.ManualEventsConfig;
 import org.firstinspires.ftc.teamcode.Events.EventManager;
 import org.firstinspires.ftc.teamcode.Math.Position;
-import org.firstinspires.ftc.teamcode.OpModes.BaseOpMode.BaseopMode;
+import org.firstinspires.ftc.teamcode.OpModes.BaseOpMode.BaseOpMode;
+import org.firstinspires.ftc.teamcode.Telemetry.TelemetryUnit;
 
-public class SeparatorTest extends BaseopMode {
-    static  {
-        ActiveServiceList.autoDriveTrain = false;
-    }
+@TeleOp
+public class SeparatorTest extends BaseOpMode {
+
     @Override
     public void initDevices() {
 
@@ -16,13 +20,40 @@ public class SeparatorTest extends BaseopMode {
 
     @Override
     public void loopCall() {
-        EventManager.getDefault().newTargetVelocity.publish(new Position(
-                -gamepad1.left_stick_y*12,0,gamepad1.right_stick_x*12
-        ));
+
+        EventManager.getDefault().telemtryEvent.publish(
+                new TelemetryUnit<>("base",
+                        EventManager.getDefault().nowOnBase.data
+                        ));
+        EventManager.getDefault().telemtryEvent.publish(
+                new TelemetryUnit<>("puck",
+                        EventManager.getDefault().newPuckInSeparator.data
+                        ));
+
+        try {
+            EventManager.getDefault().telemtryEvent.publish(
+                    new TelemetryUnit<>("forward target",
+                            EventManager.getDefault().newTargetVelocity.data.x
+                    ));
+            EventManager.getDefault().telemtryEvent.publish(
+                    new TelemetryUnit<>("current angle target",
+                            EventManager.getDefault().newTargetVelocity.data.h
+                    ));
+
+        } catch (Exception ignored) {
+        }
+
+
+
+        EventManager.getDefault().telemtryEvent.publish(
+                new TelemetryUnit<>("current angle ",
+                        EventManager.getDefault().newAngle.data
+                ));
     }
 
     @Override
     public void conditionCall() {
 
     }
+
 }

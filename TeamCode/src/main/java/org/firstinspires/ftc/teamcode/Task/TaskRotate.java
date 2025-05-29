@@ -15,11 +15,11 @@ public class TaskRotate extends MoveTask{
     private boolean isRunOnce = false;
     @Override
     public void update() {
-        if(isRunOnce && !EventManager.getDefault().robotAtAngle.data){
+        if(!isRunOnce || !EventManager.getDefault().robotAtAngle.data){
             EventManager.getDefault().newTargetVelocity.publish(
                     new Position(0,0,angle)
             );
-        }else if(EventManager.getDefault().robotAtAngle.data){
+        }else{
             EventManager.getDefault().newMoveTask.publish(nextTask);
         }
         isRunOnce = true;

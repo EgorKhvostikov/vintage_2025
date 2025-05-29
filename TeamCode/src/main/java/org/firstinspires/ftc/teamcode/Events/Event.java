@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.Events;
 
-import android.util.ArraySet;
+import java.util.ArrayList;
 
 public class Event<T> {
-    public ArraySet<EventUser> subscribers;
+    public ArrayList<EventUser> subscribers = new ArrayList<>();
 
     public void subscribe(EventUser eventUser){
         subscribers.add(eventUser);

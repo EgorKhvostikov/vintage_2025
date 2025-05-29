@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.Modules.BackWall;
 
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 
+import org.firstinspires.ftc.teamcode.Color.ColorMap;
 import org.firstinspires.ftc.teamcode.Color.ColorState;
+import org.firstinspires.ftc.teamcode.Config.ColorSensorConfig;
 import org.firstinspires.ftc.teamcode.Events.EventManager;
 import org.firstinspires.ftc.teamcode.Hardware.Hardware;
 import org.firstinspires.ftc.teamcode.MainUpdater.MainUpdater;
@@ -18,11 +20,24 @@ public class BaseColorSensor implements IUpdatable {
     public void init(){
         baseSensor = Hardware.baseSensor;
     }
-
+    public static void load(){}
     ColorState oldColorState = ColorState.NONE;
     @Override
     public void update() {
-        Color color = Color.getColor(baseSensor.red(),baseSensor.blue(),baseSensor.green());
+        ColorMap colorMap = ColorMap.findNearest(
+                new ColorMap(baseSensor.red(),baseSensor.green(),baseSensor.blue()),
+                        ColorSensorConfig.baseRedMap,ColorSensorConfig.baseBlueMap,ColorSensorConfig.baseWhiteMap
+                );
+
+        Color color;
+        if(colorMap == ColorSensorConfig.baseBlueMap) {
+            color = Color.BLUE;
+        }else if(colorMap == ColorSensorConfig.baseRedMap) {
+            color = Color.RED;
+        }else {
+            color = Color.WHITE;
+        }
+
         if(color == Color.WHITE){
             EventManager.getDefault().nowOnBase.publish(ColorState.NONE);
             return;

@@ -14,7 +14,7 @@ public class Battery implements IUpdatable {
         MainUpdater.getInstance().addModule(Battery.class);
     }
     VoltageSensor voltageSensor;
-
+    public static void load(){}
     private final ElapsedTime timer = new ElapsedTime();
 
     private boolean isUnInit = true;

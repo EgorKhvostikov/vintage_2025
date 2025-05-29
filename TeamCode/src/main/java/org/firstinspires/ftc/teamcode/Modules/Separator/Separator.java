@@ -20,8 +20,8 @@ public class Separator implements IUpdatable, EventUser {
     private final Pid pid = new Pid(PidConfig.sepatatorPidStatus);
 
     DcMotorEx motor;
-
-    {
+    public static void load(){}
+    static  {
         if(ActiveServiceList.separator) {
             MainUpdater.getInstance().addModule(Separator.class);
         }
@@ -40,8 +40,12 @@ public class Separator implements IUpdatable, EventUser {
         pid.setTarget(target);
         pid.update();
         double u = pid.getU();
+        if(Math.abs(u)>0.5){
+            u = 0.5 * Math.signum(u);
+        }
         motor.setPower(u);
         EventManager.getDefault().telemtryEvent.publish(new TelemetryUnit<>("current sep target", target));
+        EventManager.getDefault().telemtryEvent.publish(new TelemetryUnit<>("current sep position", motor.getCurrentPosition()));
     }
 
     private double target = 0;
@@ -57,11 +61,15 @@ public class Separator implements IUpdatable, EventUser {
         }
 
         if(e == EventManager.getDefault().newPuckInSeparator){
-            if(isSeparate){
-                if(e.data == ColorState.OUR){
+            if( Math.abs(pid.getPos() - target) > 5) {
+                return;
+            }
+
+            if (isSeparate) {
+                if (e.data == ColorState.OUR) {
                     target += SeparatorConfig.onePuckPositionStep;
                 }
-                if(e.data == ColorState.OPPONENT){
+                if (e.data == ColorState.OPPONENT) {
                     target -= SeparatorConfig.onePuckPositionStep;
                 }
             }
