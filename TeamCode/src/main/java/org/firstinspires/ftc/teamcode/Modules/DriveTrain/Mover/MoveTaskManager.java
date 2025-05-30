@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Task.TaskPushCenter;
 import org.firstinspires.ftc.teamcode.Telemetry.TelemetryUnit;
 
 public class MoveTaskManager implements IUpdatable, EventUser {
-     static  {
+    static  {
         if(ActiveServiceList.autoDriveTrain){
             MainUpdater.getInstance().addModule(MoveTaskManager.class);
         }

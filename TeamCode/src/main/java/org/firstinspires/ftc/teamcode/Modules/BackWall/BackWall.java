@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Modules.Interfaces.IUpdatable;
 
 public class BackWall implements EventUser, IUpdatable{
 
-    {
+    static  {
         if(ActiveServiceList.backWall){
             MainUpdater.getInstance().addModule(BackWall.class);
         }

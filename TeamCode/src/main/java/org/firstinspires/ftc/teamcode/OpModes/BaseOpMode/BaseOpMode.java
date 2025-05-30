@@ -11,9 +11,6 @@ public abstract class BaseOpMode extends LinearOpMode {
     public abstract void loopCall();
     public abstract void conditionCall();
 
-    private void initClasses(){
-
-    }
 
     private void initOpMode(){
         MainClassesLoader.loadAll();

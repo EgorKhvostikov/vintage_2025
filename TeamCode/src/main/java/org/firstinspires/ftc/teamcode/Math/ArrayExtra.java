@@ -12,7 +12,7 @@ public class ArrayExtra {
     }
     public static double findMedian(double [] arr){
         double [] sortArr = arr.clone();
-        Arrays.sort(sortArr);
-        return sortArr[sortArr.length/2];
+            Arrays.sort(sortArr);
+            return sortArr[sortArr.length/2];
     }
 }

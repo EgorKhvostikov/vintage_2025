@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Modules.DriveTrain.Mover.VoltageController
 import org.firstinspires.ftc.teamcode.Modules.Gyro.Gyro;
 import org.firstinspires.ftc.teamcode.Modules.Separator.Separator;
 import org.firstinspires.ftc.teamcode.Modules.Separator.SeparatorColorSensor;
+import org.firstinspires.ftc.teamcode.Sonar.WallFinder;
 import org.firstinspires.ftc.teamcode.Telemetry.Telemetry;
 
 public class MainClassesLoader {
@@ -21,5 +22,6 @@ public class MainClassesLoader {
         SeparatorColorSensor.load();
         Telemetry.load();
         VoltageController.load();
+        WallFinder.load();
     }
 }

@@ -3,10 +3,8 @@ package org.firstinspires.ftc.teamcode.OpModes.ModulesTests;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-
-import org.firstinspires.ftc.teamcode.Config.ManualEventsConfig;
 import org.firstinspires.ftc.teamcode.Events.EventManager;
-import org.firstinspires.ftc.teamcode.Math.Position;
+
 import org.firstinspires.ftc.teamcode.OpModes.BaseOpMode.BaseOpMode;
 import org.firstinspires.ftc.teamcode.Telemetry.TelemetryUnit;
 
@@ -39,16 +37,19 @@ public class SeparatorTest extends BaseOpMode {
                     new TelemetryUnit<>("current angle target",
                             EventManager.getDefault().newTargetVelocity.data.h
                     ));
+            EventManager.getDefault().telemtryEvent.publish(
+                    new TelemetryUnit<>("find wall",
+                            EventManager.getDefault().wallNear.data
+                    ));
+            EventManager.getDefault().telemtryEvent.publish(
+                    new TelemetryUnit<>("current angle ",
+                            EventManager.getDefault().newAngle.data
+                    ));
+
 
         } catch (Exception ignored) {
         }
 
-
-
-        EventManager.getDefault().telemtryEvent.publish(
-                new TelemetryUnit<>("current angle ",
-                        EventManager.getDefault().newAngle.data
-                ));
     }
 
     @Override

@@ -36,13 +36,15 @@ public class Separator implements IUpdatable, EventUser {
 
     @Override
     public void lateUpdate() {
-        pid.setPos(motor.getCurrentPosition());
         pid.setTarget(target);
+        pid.setPos(motor.getCurrentPosition());
         pid.update();
         double u = pid.getU();
+
         if(Math.abs(u)>0.5){
             u = 0.5 * Math.signum(u);
         }
+
         motor.setPower(u);
         EventManager.getDefault().telemtryEvent.publish(new TelemetryUnit<>("current sep target", target));
         EventManager.getDefault().telemtryEvent.publish(new TelemetryUnit<>("current sep position", motor.getCurrentPosition()));
@@ -52,16 +54,16 @@ public class Separator implements IUpdatable, EventUser {
     private boolean isSeparate = false;
     @Override
     public void onEvent(Event<?> e) {
-        if(e == EventManager.getDefault().nowOnBase){
-            if(e.data == ColorState.NONE){
-                isSeparate = true;
-            }else {
-                isSeparate = false;
-            }
-        }
+//        if(e == EventManager.getDefault().nowOnBase){
+//            if(e.data == ColorState.NONE){
+//                isSeparate = true;
+//            }else {
+//                isSeparate = false;
+//            }
+//        }
 
         if(e == EventManager.getDefault().newPuckInSeparator){
-            if( Math.abs(pid.getPos() - target) > 5) {
+            if( Math.abs(motor.getCurrentPosition() - target) > 5) {
                 return;
             }
 

@@ -11,6 +11,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+import org.firstinspires.ftc.teamcode.Sonar.I2cPort;
+
 
 public class Hardware {
     public static HardwareMap hardwareMap;
@@ -63,6 +65,12 @@ public class Hardware {
         voltageSensor = map.voltageSensor.get("Control Hub");
     }
 
+    public static I2cPort arduino;
+
+    private static void initSonar(HardwareMap map){
+        arduino = map.get(I2cPort.class, "arduinonano");
+    }
+
     private static void motorsReset(){
         separatorMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -86,6 +94,7 @@ public class Hardware {
         initVoltageSensor (map);
         initWallServo     (map);
         initButtons       (map);
+        initSonar         (map);
         motorsReset();
     }
 }

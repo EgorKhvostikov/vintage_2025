@@ -8,7 +8,7 @@ public class TaskToWall extends MoveTask {
     public void update() {
         if(!EventManager.getDefault().wallNear.data){
             EventManager.getDefault().newTargetVelocity.publish(
-                    new Position(5,0,EventManager.getDefault().newAngle.data)
+                    new Position(12,0,EventManager.getDefault().newAngle.data)
             );
         }else{
             EventManager.getDefault().newMoveTask.publish(
