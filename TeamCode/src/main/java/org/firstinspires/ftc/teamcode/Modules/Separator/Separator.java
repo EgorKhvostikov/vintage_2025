@@ -54,13 +54,13 @@ public class Separator implements IUpdatable, EventUser {
     private boolean isSeparate = false;
     @Override
     public void onEvent(Event<?> e) {
-//        if(e == EventManager.getDefault().nowOnBase){
-//            if(e.data == ColorState.NONE){
-//                isSeparate = true;
-//            }else {
-//                isSeparate = false;
-//            }
-//        }
+        if(e == EventManager.getDefault().nowOnBase){
+            if(e.data == ColorState.NONE){
+                isSeparate = true;
+            }else {
+                isSeparate = false;
+            }
+        }
 
         if(e == EventManager.getDefault().newPuckInSeparator){
             if( Math.abs(motor.getCurrentPosition() - target) > 5) {

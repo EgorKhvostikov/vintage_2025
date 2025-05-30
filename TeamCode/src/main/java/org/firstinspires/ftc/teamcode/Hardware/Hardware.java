@@ -72,7 +72,7 @@ public class Hardware {
     }
 
     private static void motorsReset(){
-        separatorMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        separatorMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         rightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
         leftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
 

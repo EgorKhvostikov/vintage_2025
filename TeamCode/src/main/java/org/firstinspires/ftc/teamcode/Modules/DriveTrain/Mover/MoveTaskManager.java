@@ -41,8 +41,11 @@ public class MoveTaskManager implements IUpdatable, EventUser {
     @Override
     public void onEvent(Event<?> e) {
         if(e == EventManager.getDefault().arriveOnBase){
-            actualTask = new TaskPuckKeep(new TaskPuckKeep(new TaskPushCenter(2)));
+            if(! (actualTask instanceof TaskPushCenter)) {
+                actualTask = new TaskPuckKeep(new TaskPushCenter(2));
+            }
         }
+
         if(e == EventManager.getDefault().newMoveTask){
             actualTask = (MoveTask) e.data;
         }
