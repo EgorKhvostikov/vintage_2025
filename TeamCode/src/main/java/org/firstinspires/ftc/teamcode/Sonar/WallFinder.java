@@ -20,7 +20,7 @@ public class WallFinder implements IUpdatable {
     public void update(){
         i2cPort.write((byte) 5);
         byte data = i2cPort.read() ;
-        boolean sonar = data < (byte) WallFindConfig.findWallDist;
+        boolean sonar = data < (byte) WallFindConfig.findWallDist && data >  0;
 
         boolean buttons = !Hardware.rightButton.getState() || !Hardware.leftButton.getState();
 

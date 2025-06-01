@@ -18,9 +18,9 @@ public class TaskRotate extends MoveTask{
         if(!isRunOnce){
             timer.reset();
         }
-        if((!isRunOnce || !EventManager.getDefault().robotAtAngle.data)  && timer.seconds() < 5){
+        if((!isRunOnce || !EventManager.getDefault().robotAtAngle.data)  && timer.seconds() < 2){
             EventManager.getDefault().newTargetVelocity.publish(
-                    new Position(0,0,angle)
+                    new Position(-6,0,angle)
             );
         }else{
             EventManager.getDefault().newMoveTask.publish(nextTask);

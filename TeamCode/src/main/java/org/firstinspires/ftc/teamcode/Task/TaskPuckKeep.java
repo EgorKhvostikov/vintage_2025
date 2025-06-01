@@ -18,7 +18,7 @@ public class TaskPuckKeep extends MoveTask{
         }
         if(timer.seconds()<2){
             EventManager.getDefault().newTargetVelocity.publish(
-                    new Position(-6,0,0)
+                    new Position(-12,0,0)
             );
         }else{
             EventManager.getDefault().newMoveTask.publish(nextTask);
