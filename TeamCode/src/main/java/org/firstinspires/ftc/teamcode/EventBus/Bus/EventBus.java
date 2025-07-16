@@ -1,33 +1,35 @@
 package org.firstinspires.ftc.teamcode.EventBus.Bus;
 
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEvent;
-import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEventUser;
+import org.firstinspires.ftc.teamcode.EventBus.Interfaces.OnEventMethod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+
 
 public class EventBus {
-    private static final EventBus instance = new EventBus();
+    private static final EventBus Instance = new EventBus();
+
     public static EventBus getInstance() {
-        return instance;
+        return Instance;
     }
 
-    private final ConcurrentHashMap< Class <? extends IEvent<?>> , ArrayList<IEventUser> > eventUserList = new ConcurrentHashMap<>();
+    HashMap< Class<? extends IEvent<?>>, ArrayList<OnEventMethod>> eventUsers = new HashMap<>();
 
-    public <T extends IEvent<?>> void subscribe(Class<T>  event, IEventUser<T> eventUser){
-        if (eventUserList.containsKey(event)) {
-            eventUserList.get(event).add(eventUser);
-        } else {
-            eventUserList.put(
-                    event, new ArrayList<>(Arrays.asList(eventUser))
-            );
+    public <T extends IEvent<?>> void  subscribe(Class<T> eventType, OnEventMethod<T> onEventMethod){
+        if(!eventUsers.containsKey(eventType)){
+            eventUsers.put(eventType, new ArrayList<>( Arrays.asList( onEventMethod ) ));
+        }else{
+            eventUsers.get(eventType).add(onEventMethod);
         }
     }
 
-    public <T> void invoke(IEvent<T> event){
-        if(eventUserList.containsKey(event.getClass())) {
-             eventUserList.get(event.getClass()).forEach(i -> i.onEvent(event));
+    public <T extends IEvent<?>> void invoke(T event){
+        ArrayList<OnEventMethod> subscribers = eventUsers.get(event.getClass());
+
+        for (OnEventMethod i: subscribers) {
+            i.onEvent(event);
         }
     }
 }

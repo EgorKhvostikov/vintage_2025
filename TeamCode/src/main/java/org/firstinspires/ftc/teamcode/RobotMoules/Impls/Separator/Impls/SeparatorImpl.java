@@ -1,17 +1,23 @@
 package org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Impls;
 
 import org.firstinspires.ftc.teamcode.EventBus.Bus.EventBus;
-import org.firstinspires.ftc.teamcode.EventBus.Events.NewVoltageAvailableEvent;
+import org.firstinspires.ftc.teamcode.EventBus.Events.NewVoltageAvailable;
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEventUser;
+import org.firstinspires.ftc.teamcode.EventBus.Interfaces.OnEvent;
+import org.firstinspires.ftc.teamcode.EventBus.Interfaces.OnEventMethod;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Interface.Sepatator;
 
-public class SeparatorImpl implements Sepatator, IEventUser<NewVoltageAvailableEvent> {
+public class SeparatorImpl implements Sepatator, IEventUser {
 
-    @Override
-    public void onEvent(NewVoltageAvailableEvent event) {
-        EventBus.getInstance().subscribe(NewVoltageAvailableEvent.class, this);
-        event.getData();
-        EventBus.getInstance().invoke(new NewVoltageAvailableEvent(12d));
+    OnEventMethod<NewVoltageAvailable> onVoltage = this::onEvent;
+
+    @OnEvent(NewVoltageAvailable.class)
+    public void onEvent(NewVoltageAvailable event){
+
+    }
+
+    {
+        EventBus.getInstance().subscribe(NewVoltageAvailable.class,onVoltage);
     }
 
 }

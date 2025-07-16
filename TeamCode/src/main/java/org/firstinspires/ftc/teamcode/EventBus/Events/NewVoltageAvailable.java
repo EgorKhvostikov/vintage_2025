@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.EventBus.Events;
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEvent;
 
-public class NewVoltageAvailableEvent implements IEvent<Double> {
+public class NewVoltageAvailable implements IEvent<Double> {
     Double data = 1d;
 
-    public NewVoltageAvailableEvent(Double data) {
+    public NewVoltageAvailable(Double data) {
         this.data = data;
     }
 
