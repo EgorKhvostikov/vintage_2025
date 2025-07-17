@@ -15,9 +15,9 @@ public class EventBus {
         return Instance;
     }
 
-    HashMap< Class<? extends IEvent<?>>, ArrayList<OnEventMethod>> eventUsers = new HashMap<>();
+    HashMap< Class<? extends IEvent>, ArrayList<OnEventMethod>> eventUsers = new HashMap<>();
 
-    public <T extends IEvent<?>> void  subscribe(Class<T> eventType, OnEventMethod<T> onEventMethod){
+    public <K,T extends IEvent<K>> void  subscribe(Class<T> eventType, OnEventMethod<K,T> onEventMethod){
         if(!eventUsers.containsKey(eventType)){
             eventUsers.put(eventType, new ArrayList<>( Arrays.asList( onEventMethod ) ));
         }else{
@@ -25,7 +25,7 @@ public class EventBus {
         }
     }
 
-    public <T extends IEvent<?>> void invoke(T event){
+    public <K,T extends IEvent<K>> void invoke(T event){
         ArrayList<OnEventMethod> subscribers = eventUsers.get(event.getClass());
 
         for (OnEventMethod i: subscribers) {

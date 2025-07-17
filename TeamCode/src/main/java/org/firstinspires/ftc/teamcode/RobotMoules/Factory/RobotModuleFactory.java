@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.RobotMoules.Factory;
 
 
-import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Impls.SeparatorImpl;
-import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Interface.Sepatator;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Separator.Impls.SeparatorImpl;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Separator.Interface.Separator;
 import org.firstinspires.ftc.teamcode.ServiceActivator.ServiceActivatorConfig;
 
 public class RobotModuleFactory {
@@ -13,7 +13,7 @@ public class RobotModuleFactory {
         return this;
     }
 
-    public Sepatator createSeparator(){
+    public Separator createSeparator(){
         return new SeparatorImpl();
     }
 }

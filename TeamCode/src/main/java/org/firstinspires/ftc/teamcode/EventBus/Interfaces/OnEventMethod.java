@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.EventBus.Interfaces;
 
 @FunctionalInterface
-public interface OnEventMethod <T extends IEvent<?>> {
+public interface OnEventMethod <K,T extends IEvent<K>> {
     void onEvent(T event);
 }
