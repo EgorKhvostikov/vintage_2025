@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Hardware.Impls.Servo.Interface.Servo;
 import org.firstinspires.ftc.teamcode.Hardware.Pool.DevicePool;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.Observer.RegisterNewBaseColorSensorListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Interface.IRobotModule;
-import org.firstinspires.ftc.teamcode.RobotMoules.Observers.IListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Observer.IListener;
 import org.firstinspires.ftc.teamcode.Util.Color.ColorState;
 
 public class BackWall implements IRobotModule, IEventUser, IListener<ColorState> {

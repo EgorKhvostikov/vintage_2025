@@ -59,6 +59,10 @@ public class BaseColorSensor implements IEventUser, IRobotModule {
     @Override
     public void init() {
         colorSensor = DevicePool.getInstance().baseSensor;
+    }
+
+    @Override
+    public void subscribeInit() {
         EventBus.getInstance().subscribe(RegisterNewBaseColorSensorListener.class,this::onEvent);
     }
 }

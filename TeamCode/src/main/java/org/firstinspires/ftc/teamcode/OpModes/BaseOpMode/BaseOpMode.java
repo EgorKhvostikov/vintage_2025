@@ -24,6 +24,11 @@ public abstract class BaseOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        loopRun();
+        initOpMode();
+        robotInit();
+        waitForStart();
+        while (opModeIsActive()) {
+            loopRun();
+        }
     }
 }

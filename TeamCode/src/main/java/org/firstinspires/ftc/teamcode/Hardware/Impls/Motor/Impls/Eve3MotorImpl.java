@@ -8,4 +8,14 @@ public class Eve3MotorImpl implements Motor {
     public double getPosition() {
         return 0;
     }
+
+    @Override
+    public void setPower(double v) {
+
+    }
+
+    @Override
+    public double getCurrent() {
+        return 0;
+    }
 }

@@ -1,9 +1,17 @@
 package org.firstinspires.ftc.teamcode.Hardware.Factory;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 
 
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.Button;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.ButtonImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls.Eve3MotorImpl;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Impls.SonarImpl;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Intarface.Sonar;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Impls.VoltageSensorImpl;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Interface.VoltageSensor;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.I2CPort.I2cPort;
 import org.firstinspires.ftc.teamcode.ServiceActivator.ServiceActivatorConfig;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.Impls.ColorSensorFake;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.Impls.ColorSensorImpl;
@@ -54,4 +62,23 @@ public class HardwareFactory {
         }
     }
 
+    public VoltageSensor createVoltageSensor(String name){
+        if(serviceActivatorConfig.isColorSensorsActive){
+            return new VoltageSensorImpl();
+        }else{
+            return new VoltageSensorImpl();
+        }
+    }
+
+    public IMU createIMU(){
+        return hardwareMap.get(IMU.class, "imu");
+    }
+
+    public Sonar createSonar(String name){
+        return new SonarImpl(hardwareMap.get(I2cPort.class, name));
+    }
+
+    public Button createButton(String name){
+        return new ButtonImpl();
+    }
 }

@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.Observer;
 
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEventUser;
-import org.firstinspires.ftc.teamcode.RobotMoules.Observers.IObserver;
-import org.firstinspires.ftc.teamcode.RobotMoules.Observers.IListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Observer.IObserver;
+import org.firstinspires.ftc.teamcode.RobotMoules.Observer.IListener;
 import org.firstinspires.ftc.teamcode.Util.Color.ColorState;
 
 import java.util.ArrayList;

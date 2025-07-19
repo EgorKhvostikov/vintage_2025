@@ -1,18 +1,19 @@
 package org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Separator.Impls;
 
-import org.firstinspires.ftc.teamcode.Config.PidConfigs;
+import org.firstinspires.ftc.teamcode.Config.PidsConfig;
 import org.firstinspires.ftc.teamcode.Config.SeparatorConfig;
 import org.firstinspires.ftc.teamcode.EventBus.Bus.EventBus;
 import org.firstinspires.ftc.teamcode.EventBus.Events.NewPuckInSeparator;
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEventUser;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Interface.Motor;
 import org.firstinspires.ftc.teamcode.Hardware.Pool.DevicePool;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.Observer.RegisterNewBaseColorSensorListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Separator.Separator.Interface.Separator;
 import org.firstinspires.ftc.teamcode.Util.Color.ColorState;
 import org.firstinspires.ftc.teamcode.Util.Math.Pid.Pid;
 
 public class SeparatorImpl implements Separator, IEventUser {
-    private final Pid pid = new Pid(PidConfigs.separatorPidConfig);
+    private final Pid pid = new Pid(PidsConfig.separatorPidConfig);
 
     private Motor motor;
     private double target = 0;
@@ -47,14 +48,19 @@ public class SeparatorImpl implements Separator, IEventUser {
         }
     }
 
-
-
-
-
     @Override
     public void init() {
-        EventBus.getInstance().subscribe(NewPuckInSeparator.class,this::onEvent);
-
         motor = DevicePool.getInstance().separatorMotor;
+        EventBus.getInstance().invoke(new RegisterNewBaseColorSensorListener(this));
+    }
+
+    @Override
+    public void subscribeInit() {
+        EventBus.getInstance().subscribe(NewPuckInSeparator.class,this::onEvent);
+    }
+
+    @Override
+    public void set(ColorState data) {
+        isSeparate = data == ColorState.NONE;
     }
 }
