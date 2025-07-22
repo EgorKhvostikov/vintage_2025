@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Util.Color.RgbColorVector;
 import org.firstinspires.ftc.teamcode.Config.ColorSensorConfig;
 
 public class SeparatorColorSensorImpl implements SeparatorColorSensor, IEventUser {
-    ColorSensor colorSensor;
+    private ColorSensor colorSensor;
 
     @Override
     public void update() {

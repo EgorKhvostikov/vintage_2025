@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro;
+package org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer;
 
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEvent;
 

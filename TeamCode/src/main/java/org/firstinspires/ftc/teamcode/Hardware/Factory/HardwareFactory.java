@@ -1,16 +1,22 @@
 package org.firstinspires.ftc.teamcode.Hardware.Factory;
 
+import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.Button;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.ButtonFake;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.ButtonImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls.Eve3MotorImpl;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Impls.SonarFake;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Impls.SonarImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Intarface.Sonar;
-import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Impls.VoltageSensorImpl;
-import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Interface.VoltageSensor;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Impls.RevVoltageSensorFake;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Impls.RevVoltageSensorImpl;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Interface.RevVoltageSensor;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.I2CPort.I2cPort;
 import org.firstinspires.ftc.teamcode.ServiceActivator.ServiceActivatorConfig;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.Impls.ColorSensorFake;
@@ -20,7 +26,8 @@ import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls.DcMotorFake;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls.DcMotorImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Interface.Motor;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Servo.Impls.ServoFake;
-import org.firstinspires.ftc.teamcode.Hardware.Impls.Servo.Interface.Servo;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Servo.Interface.ServoMotor;
+import org.firstinspires.ftc.teamcode.Util.Color.RgbColorVector;
 
 public class HardwareFactory {
     private final HardwareMap hardwareMap;
@@ -31,42 +38,42 @@ public class HardwareFactory {
         this.serviceActivatorConfig = serviceActivatorConfig;
     }
 
-    public Motor createDcMotor(String name){
+    public Motor createDcMotor(String name,Double pos,Double vol){
         if(serviceActivatorConfig.isMotorsActive) {
-            return new DcMotorImpl();
+            return new DcMotorImpl(hardwareMap.get(DcMotorEx.class,name));
         }else{
-            return new DcMotorFake();
+            return new DcMotorFake(pos,vol);
         }
     }
-    public Motor createEve3Motor(String name){
+    public Motor createEve3Motor(String name,Double pos,Double vol){
         if(serviceActivatorConfig.isMotorsActive) {
-            return new Eve3MotorImpl();
+            return new Eve3MotorImpl(hardwareMap.get(DcMotorEx.class,name));
         }else{
-            return new DcMotorFake();
+            return new DcMotorFake(pos,vol);
         }
     }
 
-    public Servo createServo(String name){
+    public ServoMotor createServo(String name){
         if(serviceActivatorConfig.isServosActive){
-            return hardwareMap.get(Servo.class,name);
+            return hardwareMap.get(ServoMotor.class,name);
         }else{
             return new ServoFake();
         }
     }
 
-    public ColorSensor createColorSensor(String name){
+    public ColorSensor createColorSensor(String name, RgbColorVector vector){
         if(serviceActivatorConfig.isColorSensorsActive){
-            return new ColorSensorImpl();
+            return new ColorSensorImpl(hardwareMap.get(AdafruitI2cColorSensor.class,name));
         }else{
-            return new ColorSensorFake();
+            return new ColorSensorFake(vector);
         }
     }
 
-    public VoltageSensor createVoltageSensor(String name){
+    public RevVoltageSensor createVoltageSensor(){
         if(serviceActivatorConfig.isColorSensorsActive){
-            return new VoltageSensorImpl();
+            return new RevVoltageSensorImpl(hardwareMap.voltageSensor.get("Control Hub"));
         }else{
-            return new VoltageSensorImpl();
+            return new RevVoltageSensorFake();
         }
     }
 
@@ -74,11 +81,19 @@ public class HardwareFactory {
         return hardwareMap.get(IMU.class, "imu");
     }
 
-    public Sonar createSonar(String name){
-        return new SonarImpl(hardwareMap.get(I2cPort.class, name));
+    public Sonar createSonar(String name,Byte dist){
+       if(serviceActivatorConfig.isSonarActive){
+           return new SonarImpl(hardwareMap.get(I2cPort.class, name));
+       }else {
+           return new SonarFake(dist);
+       }
     }
 
-    public Button createButton(String name){
-        return new ButtonImpl();
+    public Button createButton(String name,Boolean check){
+        if(serviceActivatorConfig.isButtonActive){
+            return new ButtonImpl(hardwareMap.get(DigitalChannel.class,name));
+        }else{
+            return new ButtonFake(check);
+        }
     }
 }

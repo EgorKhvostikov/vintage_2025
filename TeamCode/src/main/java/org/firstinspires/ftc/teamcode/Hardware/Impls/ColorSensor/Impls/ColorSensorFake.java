@@ -4,8 +4,14 @@ import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.Interface.Color
 import org.firstinspires.ftc.teamcode.Util.Color.RgbColorVector;
 
 public class ColorSensorFake implements ColorSensor {
+    private final RgbColorVector vector;
+
+    public ColorSensorFake(RgbColorVector vector) {
+        this.vector = vector;
+    }
+
     @Override
     public RgbColorVector getRgbVector() {
-        return null;
+        return vector;
     }
 }

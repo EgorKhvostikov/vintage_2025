@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskMana
 
 import org.firstinspires.ftc.teamcode.EventBus.Bus.EventBus;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManager.Event.NewMoveTask;
-import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.AngleListener;
-import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.RegisterNewAngleListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.AngleListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.RegisterNewAngleListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.WallFinderListener;
 import org.firstinspires.ftc.teamcode.Util.Math.Position.Position;
 

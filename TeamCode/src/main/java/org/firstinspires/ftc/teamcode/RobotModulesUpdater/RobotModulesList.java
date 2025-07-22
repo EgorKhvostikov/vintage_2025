@@ -15,7 +15,10 @@ public class RobotModulesList {
 
     public RobotModulesList(RobotModuleFactory factory) {
         robotModules = Arrays.asList(
-                factory.createSeparator(), factory.createSeparator()
+                factory.createSeparator(),factory.createVoltageController(),
+                factory.createSeparatorColorSensor(),factory.createBattery(),
+                factory.createBaseFinder(),factory.createWallFinder(),
+                factory.createGyro(),factory.createMoveTaskManager(),factory.createBackWall()
         );
     }
 }

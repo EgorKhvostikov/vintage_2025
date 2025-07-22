@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManag
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.Observer.RegisterNewRobotAtAngleListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.Observer.RobotAtAngleObserver;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.VoltageController.Interface.VoltageController;
-import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.AngleListener;
-import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.RegisterNewAngleListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.AngleListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.RegisterNewAngleListener;
 import org.firstinspires.ftc.teamcode.Util.Math.Pid.Pid;
 import org.firstinspires.ftc.teamcode.Util.Math.Position.Position;
 

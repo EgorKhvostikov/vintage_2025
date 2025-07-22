@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro;
+package org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer;
 
 import java.util.ArrayList;
 

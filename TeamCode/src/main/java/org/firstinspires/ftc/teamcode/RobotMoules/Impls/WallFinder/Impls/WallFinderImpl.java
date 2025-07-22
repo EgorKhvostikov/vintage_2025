@@ -33,6 +33,7 @@ public class WallFinderImpl implements WallFinder, IEventUser {
     public void init(){
         motorRight = DevicePool.getInstance().rightDrive;
         motorLeft = DevicePool.getInstance().leftDrive;
+
         buttonLeft = DevicePool.getInstance().leftButton;
         buttonRight = DevicePool.getInstance().rightButton;
 

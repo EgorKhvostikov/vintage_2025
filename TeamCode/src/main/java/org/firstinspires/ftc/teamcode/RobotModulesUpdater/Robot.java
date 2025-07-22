@@ -20,6 +20,7 @@ public class Robot {
 
     public void init(){
         robotModulesList.getRobotModules().forEach(IRobotModule::init );
+        robotModulesList.getRobotModules().forEach(IRobotModule::subscribeInit);
     }
 
     public void update(){

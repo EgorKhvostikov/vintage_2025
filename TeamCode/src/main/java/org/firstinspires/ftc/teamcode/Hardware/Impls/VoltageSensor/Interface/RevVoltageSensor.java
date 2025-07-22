@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.Hardware.Impls.VoltageSensor.Interface;
 
-public interface VoltageSensor {
+public interface RevVoltageSensor {
     double getVoltage();
 }

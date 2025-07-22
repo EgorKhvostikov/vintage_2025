@@ -1,21 +1,14 @@
 package org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls;
 
-import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Interface.Motor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-public class Eve3MotorImpl implements Motor {
+public class Eve3MotorImpl extends DcMotorImpl{
 
-    @Override
-    public double getPosition() {
-        return 0;
+    public Eve3MotorImpl(DcMotorEx motor) {
+        super(motor);
     }
-
     @Override
-    public void setPower(double v) {
-
-    }
-
-    @Override
-    public double getCurrent() {
-        return 0;
+    public void setPower(double v){
+        motor.setPower(Math.min(v, 0.5));
     }
 }

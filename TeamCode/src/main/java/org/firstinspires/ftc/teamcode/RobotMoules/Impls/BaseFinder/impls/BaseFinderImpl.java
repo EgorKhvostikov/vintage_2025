@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.ColorSensor;
+package org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.impls;
 
 
 import org.firstinspires.ftc.teamcode.Config.ColorSensorConfig;
@@ -8,14 +8,14 @@ import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEventUser;
 import org.firstinspires.ftc.teamcode.GlobalState.MatchData.TeamData;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.Interface.ColorSensor;
 import org.firstinspires.ftc.teamcode.Hardware.Pool.DevicePool;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.Interface.BaseFinder;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.Observer.BaseColorSensorObserver;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.BaseFinder.Observer.RegisterNewBaseColorSensorListener;
-import org.firstinspires.ftc.teamcode.RobotMoules.Interface.IRobotModule;
 import org.firstinspires.ftc.teamcode.Util.Color.ColorState;
 import org.firstinspires.ftc.teamcode.Util.Color.ColorUnit;
 import org.firstinspires.ftc.teamcode.Util.Color.RgbColorVector;
 
-public class BaseColorSensor implements IEventUser, IRobotModule {
+public class BaseFinderImpl implements BaseFinder, IEventUser{
     private ColorSensor colorSensor;
     private ColorState oldColorState = ColorState.NONE;
     private final BaseColorSensorObserver observer = new BaseColorSensorObserver();
@@ -63,6 +63,6 @@ public class BaseColorSensor implements IEventUser, IRobotModule {
 
     @Override
     public void subscribeInit() {
-        EventBus.getInstance().subscribe(RegisterNewBaseColorSensorListener.class,this::onEvent);
+        EventBus.getInstance().subscribe(RegisterNewBaseColorSensorListener.class, this::onEvent);
     }
 }
