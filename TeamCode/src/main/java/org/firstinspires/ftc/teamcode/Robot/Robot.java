@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode.RobotModulesUpdater;
+package org.firstinspires.ftc.teamcode.Robot;
 
 import org.firstinspires.ftc.teamcode.RobotMoules.Factory.RobotModuleFactory;
 import org.firstinspires.ftc.teamcode.RobotMoules.Interface.IRobotModule;
 import org.firstinspires.ftc.teamcode.ServiceActivator.ServiceActivatorConfig;
+import org.firstinspires.ftc.teamcode.Telemetry.Telemetry;
 
 public class Robot {
     private RobotModulesList robotModulesList;
@@ -26,5 +27,6 @@ public class Robot {
     public void update(){
         robotModulesList.getRobotModules().forEach(IRobotModule::update);
         robotModulesList.getRobotModules().forEach(IRobotModule::lateUpdate);
+        Telemetry.getInstance().loopAnd();
     }
 }

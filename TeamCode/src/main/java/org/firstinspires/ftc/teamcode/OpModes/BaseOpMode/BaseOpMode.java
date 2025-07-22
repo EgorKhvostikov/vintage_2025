@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.OpModes.BaseOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.RobotModulesUpdater.Robot;
+import org.firstinspires.ftc.teamcode.Robot.Robot;
 import org.firstinspires.ftc.teamcode.ServiceActivator.ServiceActivatorConfig;
 
 public abstract class BaseOpMode extends LinearOpMode {
