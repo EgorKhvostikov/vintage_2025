@@ -5,14 +5,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Hardware.Factory.HardwareFactory;
 import org.firstinspires.ftc.teamcode.Hardware.Pool.DevicePool;
 import org.firstinspires.ftc.teamcode.Robot.Robot;
+import org.firstinspires.ftc.teamcode.RobotMoules.OpenCV.Camera;
 import org.firstinspires.ftc.teamcode.ServiceActivator.ServiceActivatorConfig;
 
 public abstract class BaseOpMode extends LinearOpMode {
     protected Robot robot;
     protected static ServiceActivatorConfig serviceActivatorConfig = ServiceActivatorConfig.getDefault();
+    protected Camera camera = new Camera();
 
     private void initOpMode(){
         DevicePool.getInstance().init(new HardwareFactory(this.hardwareMap,serviceActivatorConfig));
+        camera.init(this);
     }
 
     private void robotInit(){

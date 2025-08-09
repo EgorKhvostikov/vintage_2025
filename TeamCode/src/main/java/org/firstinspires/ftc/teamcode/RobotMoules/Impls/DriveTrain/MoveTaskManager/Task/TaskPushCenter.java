@@ -19,7 +19,7 @@ public class TaskPushCenter extends MoveTask{
             timer.reset();
         }
         isRunOnce = true;
-
+        //TODO change 0 to camera puck angle
         if(timer.seconds()<delay){
             velocity = new Position(12,0,0);
         }else{
