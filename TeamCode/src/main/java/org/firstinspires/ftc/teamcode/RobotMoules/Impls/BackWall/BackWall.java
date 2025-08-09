@@ -26,11 +26,12 @@ public class BackWall implements IRobotModule, IEventUser, IListener<ColorState>
     @Override
     public void init() {
         servo = DevicePool.getInstance().backWallServo;
+        EventBus.getInstance().invoke(new RegisterNewBaseColorSensorListener(this));
     }
 
     @Override
     public void subscribeInit() {
-        EventBus.getInstance().invoke(new RegisterNewBaseColorSensorListener(this));
+
     }
 
     @Override

@@ -20,13 +20,13 @@ public class Robot {
     }
 
     public void init(){
-        robotModulesList.getRobotModules().forEach(IRobotModule::init );
         robotModulesList.getRobotModules().forEach(IRobotModule::subscribeInit);
+        robotModulesList.getRobotModules().forEach(IRobotModule::init );
     }
 
     public void update(){
         robotModulesList.getRobotModules().forEach(IRobotModule::update);
         robotModulesList.getRobotModules().forEach(IRobotModule::lateUpdate);
-        Telemetry.getInstance().loopAnd();
+        Telemetry.getInstance().loopEnd();
     }
 }

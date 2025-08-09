@@ -1,16 +1,19 @@
 package org.firstinspires.ftc.teamcode.Hardware.Factory;
 
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.Button;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.ButtonFake;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.ButtonImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls.Eve3MotorImpl;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.Servo.Impls.ServoImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Impls.SonarFake;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Impls.SonarImpl;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Intarface.Sonar;
@@ -47,7 +50,10 @@ public class HardwareFactory {
     }
     public Motor createEve3Motor(String name,Double pos,Double vol){
         if(serviceActivatorConfig.isMotorsActive) {
-            return new Eve3MotorImpl(hardwareMap.get(DcMotorEx.class,name));
+            DcMotorEx motor = hardwareMap.get(DcMotorEx.class,name);
+            motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            return new Eve3MotorImpl(motor);
         }else{
             return new DcMotorFake(pos,vol);
         }
@@ -55,7 +61,7 @@ public class HardwareFactory {
 
     public ServoMotor createServo(String name){
         if(serviceActivatorConfig.isServosActive){
-            return hardwareMap.get(ServoMotor.class,name);
+            return new ServoImpl(hardwareMap.get(Servo.class,name));
         }else{
             return new ServoFake();
         }

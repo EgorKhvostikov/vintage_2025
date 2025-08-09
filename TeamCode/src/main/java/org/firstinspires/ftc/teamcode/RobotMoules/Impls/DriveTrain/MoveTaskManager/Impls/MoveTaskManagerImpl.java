@@ -9,6 +9,8 @@ import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManag
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManager.Task.MoveTask;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManager.Task.TaskPuckKeep;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManager.Task.TaskPushCenter;
+import org.firstinspires.ftc.teamcode.Telemetry.Telemetry;
+import org.firstinspires.ftc.teamcode.Telemetry.TelemetryUnit;
 
 public class MoveTaskManagerImpl implements MoveTaskManager, IEventUser {
     private MoveTask actualTask = new TaskPushCenter(2);
@@ -16,6 +18,7 @@ public class MoveTaskManagerImpl implements MoveTaskManager, IEventUser {
 
     @Override
     public void update() {
+        Telemetry.getInstance().add(new TelemetryUnit<>(actualTask.getClass().getSimpleName(),"move task"));
         actualTask.update();
         observer.notifyListeners(actualTask.getVelocity());
     }

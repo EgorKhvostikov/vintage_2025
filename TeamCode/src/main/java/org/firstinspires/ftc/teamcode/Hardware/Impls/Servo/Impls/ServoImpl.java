@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Hardware.Impls.Servo.Interface.ServoMotor;
 
 public class ServoImpl implements ServoMotor {
 
-    private Servo servo;
+    private final Servo servo;
 
     public ServoImpl(Servo servo) {
         this.servo = servo;

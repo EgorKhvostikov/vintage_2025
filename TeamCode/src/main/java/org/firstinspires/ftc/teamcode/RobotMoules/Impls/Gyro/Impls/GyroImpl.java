@@ -35,7 +35,7 @@ public class GyroImpl implements Gyro, IEventUser {
 
     @Override
     public  void update() {
-        if(timer.seconds()>0.05) {
+        if(timer.seconds()>0.1) {
             double angle = -imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
             observer.notifyListeners(angle);
             timer.reset();

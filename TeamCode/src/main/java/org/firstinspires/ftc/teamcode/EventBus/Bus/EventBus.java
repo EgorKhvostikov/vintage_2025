@@ -28,6 +28,10 @@ public class EventBus {
     public <K,T extends IEvent<K>> void invoke(T event){
         ArrayList<OnEventMethod> subscribers = eventUsers.get(event.getClass());
 
+        if(subscribers == null){
+            return;
+        }
+
         for (OnEventMethod i: subscribers) {
             i.onEvent(event);
         }

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Impls;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Interface.Motor;
 
@@ -36,6 +37,11 @@ public class DcMotorFake implements Motor {
 
     @Override
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior m) {
+
+    }
+
+    @Override
+    public void setDerection(DcMotorSimple.Direction direction) {
 
     }
 }

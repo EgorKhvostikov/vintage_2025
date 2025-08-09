@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.Hardware.Pool;
 
 
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.teamcode.Hardware.Factory.HardwareFactory;
 
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.Button;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.ButtonsConfig;
-import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.ColorSensorConfig;
+import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.ColorSensorManualConfig;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.ColorSensor.Interface.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Interface.Motor;
@@ -28,11 +29,12 @@ public class DevicePool {
     public void init(HardwareFactory factory){
          rightDrive = factory.createDcMotor("rightDrive",MotorsConfig.rightDrivePos,MotorsConfig.rightDriveVol);
          leftDrive = factory.createDcMotor( "leftDrive", MotorsConfig.leftDrivePos,MotorsConfig.leftDriveVol);
+         rightDrive.setDerection(DcMotorSimple.Direction.REVERSE);
 
-         separatorMotor = factory.createEve3Motor("leftDrive", MotorsConfig.separatorPos,MotorsConfig.separatorVol);
+         separatorMotor = factory.createEve3Motor("separatorDrive", MotorsConfig.separatorPos,MotorsConfig.separatorVol);
 
-         baseSensor = factory.createColorSensor("baseSensor", ColorSensorConfig.rgbBase);
-         puckSensor = factory.createColorSensor("puckSensor", ColorSensorConfig.rgbPuck);
+         baseSensor = factory.createColorSensor("baseSensor", ColorSensorManualConfig.rgbBase);
+         puckSensor = factory.createColorSensor("puckSensor", ColorSensorManualConfig.rgbPuck);
 
          backWallServo = factory.createServo("backWallServo");
 

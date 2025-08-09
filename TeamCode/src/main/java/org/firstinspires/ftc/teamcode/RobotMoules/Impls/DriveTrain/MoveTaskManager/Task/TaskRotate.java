@@ -30,7 +30,7 @@ public class TaskRotate extends MoveTask implements IListener<Boolean> {
             timer.reset();
         }
 
-        if((!isRunOnce || !atAngle)  && timer.seconds() < 2){
+        if((!isRunOnce || !atAngle)  && timer.seconds() < 0.5){
             velocity = new Position(-6,0,angle);
         }else{
             atAngle = false;
@@ -39,6 +39,5 @@ public class TaskRotate extends MoveTask implements IListener<Boolean> {
 
         isRunOnce = true;
     }
-
 
 }

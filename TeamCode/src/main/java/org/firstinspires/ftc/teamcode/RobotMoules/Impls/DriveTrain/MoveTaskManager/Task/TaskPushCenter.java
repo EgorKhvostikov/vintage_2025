@@ -23,7 +23,7 @@ public class TaskPushCenter extends MoveTask{
         if(timer.seconds()<delay){
             velocity = new Position(12,0,0);
         }else{
-            EventBus.getInstance().invoke(  new NewMoveTask(new TaskRotate(-45,new TaskToWall()) ));
+            EventBus.getInstance().invoke(  new NewMoveTask(new TaskRotate(90,new TaskToWall()) ));
         }
 
     }

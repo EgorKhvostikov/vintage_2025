@@ -8,7 +8,11 @@ import org.firstinspires.ftc.teamcode.Util.Color.ColorState;
 import java.util.ArrayList;
 
 public class BaseColorSensorObserver implements IEventUser, IObserver<ColorState, IListener<ColorState>> {
-    ArrayList<IListener<ColorState>> registered = new ArrayList<>();
+    private final ArrayList<IListener<ColorState>> registered = new ArrayList<>();
+
+    public ArrayList<IListener<ColorState>> getRegistered() {
+        return registered;
+    }
 
     @Override
     public void register(IListener<ColorState> r) {

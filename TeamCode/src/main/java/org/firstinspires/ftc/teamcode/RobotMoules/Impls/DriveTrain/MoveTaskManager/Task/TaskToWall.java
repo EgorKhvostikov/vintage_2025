@@ -4,18 +4,19 @@ import org.firstinspires.ftc.teamcode.EventBus.Bus.EventBus;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManager.Event.NewMoveTask;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.AngleListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.RegisterNewAngleListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.RegisterNewWallFinderListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.WallFinderListener;
 import org.firstinspires.ftc.teamcode.Util.Math.Position.Position;
 
 public class TaskToWall extends MoveTask implements AngleListener, WallFinderListener {
 
     public TaskToWall() {
-        EventBus.getInstance().invoke(new RegisterNewAngleListener(this));
+        EventBus.getInstance().invoke(new RegisterNewWallFinderListener(this));
         EventBus.getInstance().invoke(new RegisterNewAngleListener(this));
     }
 
     private boolean isRunOnce = false;
-    private double angle;
+    private double angle = 0;
     private boolean wallNear = false;
     @Override
     public void update() {
@@ -23,10 +24,10 @@ public class TaskToWall extends MoveTask implements AngleListener, WallFinderLis
             timer.reset();
             isRunOnce = true;
         }
-        if((!wallNear && (timer.seconds() < 5)) ){
+        if( ((!wallNear && (timer.seconds() < 2.5))) || timer.seconds() < 1 ){
             velocity = new Position(12 ,0,angle);
         }else{
-            EventBus.getInstance().invoke( new NewMoveTask(new TaskRotate(angle+15,new TaskToWall())) ) ;
+            EventBus.getInstance().invoke( new NewMoveTask(new TaskRotate(angle+75 ,new TaskToWall())) ) ;
         }
     }
 
