@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.RobotMoules.Impls.BackWall;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.Config.ServoPositionConfig;
 import org.firstinspires.ftc.teamcode.EventBus.Bus.EventBus;
 import org.firstinspires.ftc.teamcode.EventBus.Interfaces.IEventUser;
@@ -14,17 +16,22 @@ public class BackWall implements IRobotModule, IEventUser, IListener<ColorState>
     private ServoMotor servo;
     private ColorState base = ColorState.OUR;
 
+    private ElapsedTime timer = new ElapsedTime();
     @Override
     public void lateUpdate() {
         if(base == ColorState.OUR){
+            timer.reset();
             servo.setPosition(ServoPositionConfig.backWallUpPosition);
         }else{
-            servo.setPosition(ServoPositionConfig.backWallDownPosition);
+            if(timer.seconds()>0.05) {
+                servo.setPosition(ServoPositionConfig.backWallDownPosition);
+            }
         }
     }
 
     @Override
     public void init() {
+        timer.reset();
         servo = DevicePool.getInstance().backWallServo;
         EventBus.getInstance().invoke(new RegisterNewBaseColorSensorListener(this));
     }

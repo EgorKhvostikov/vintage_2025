@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.Wall
 import org.firstinspires.ftc.teamcode.Util.Math.Position.Position;
 
 public class TaskToWall extends MoveTask implements AngleListener, WallFinderListener {
-
+    public static int direction = 1;
     public TaskToWall() {
         EventBus.getInstance().invoke(new RegisterNewWallFinderListener(this));
         EventBus.getInstance().invoke(new RegisterNewAngleListener(this));
@@ -27,7 +27,7 @@ public class TaskToWall extends MoveTask implements AngleListener, WallFinderLis
         if( ((!wallNear && (timer.seconds() < 2.5))) || timer.seconds() < 1 ){
             velocity = new Position(12 ,0,angle);
         }else{
-            EventBus.getInstance().invoke( new NewMoveTask(new TaskRotate(angle+75 ,new TaskToWall())) ) ;
+            EventBus.getInstance().invoke( new NewMoveTask(new TaskRotate(angle+95*Math.signum(direction) ,new TaskToWall())) ) ;
         }
     }
 

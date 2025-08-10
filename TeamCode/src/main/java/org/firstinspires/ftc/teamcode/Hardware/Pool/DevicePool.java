@@ -33,6 +33,8 @@ public class DevicePool {
 
          separatorMotor = factory.createEve3Motor("separatorDrive", MotorsConfig.separatorPos,MotorsConfig.separatorVol);
 
+         brush = factory.createDcMotor("brushDrive", 0d,0d);
+
          baseSensor = factory.createColorSensor("baseSensor", ColorSensorManualConfig.rgbBase);
          puckSensor = factory.createColorSensor("puckSensor", ColorSensorManualConfig.rgbPuck);
 
@@ -52,6 +54,8 @@ public class DevicePool {
     public Motor leftDrive ;
 
     public Motor separatorMotor;
+
+    public Motor brush;
 
     public ColorSensor baseSensor;
     public ColorSensor puckSensor;

@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Hardware.Impls.Button.Button;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Motor.Interface.Motor;
 import org.firstinspires.ftc.teamcode.Hardware.Impls.Sonar.Intarface.Sonar;
 import org.firstinspires.ftc.teamcode.Hardware.Pool.DevicePool;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.MoveTaskManager.Task.TaskToWall;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Interface.WallFinder;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.WallFinderObserver;
 import org.firstinspires.ftc.teamcode.Telemetry.Telemetry;
@@ -21,9 +22,11 @@ public class WallFinderImpl implements WallFinder, IEventUser {
     public void update() {
         byte sonarDist = sonar.read();
         boolean sonar;
-        if(timer.seconds()<90) {
+        if(timer.seconds()<30) {
+            TaskToWall.direction = 1;
             sonar = sonarDist < WallFinderConfig.wallFindDistance && sonarDist > 0;
         }else{
+            TaskToWall.direction = -1;
             sonar = sonarDist < WallFinderConfig.wallFindLateDistance && sonarDist > 0;
         }
         boolean button = !buttonRight.getState() || !buttonLeft.getState();

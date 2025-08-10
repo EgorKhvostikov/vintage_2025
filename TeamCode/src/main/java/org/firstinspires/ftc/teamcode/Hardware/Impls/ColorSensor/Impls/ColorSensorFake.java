@@ -14,4 +14,9 @@ public class ColorSensorFake implements ColorSensor {
     public RgbColorVector getRgbVector() {
         return vector;
     }
+
+    @Override
+    public int getAlpha() {
+        return 0;
+    }
 }

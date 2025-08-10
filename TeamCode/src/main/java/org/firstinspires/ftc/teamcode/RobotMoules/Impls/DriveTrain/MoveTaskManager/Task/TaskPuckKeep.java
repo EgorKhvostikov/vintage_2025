@@ -20,7 +20,7 @@ public class TaskPuckKeep extends MoveTask{
         }
         isRunOnce = true;
         if(timer.seconds()<2){
-            velocity = new Position(-12,0,0);
+            velocity = new Position(-6,0,0);
 
         }else{
             EventBus.getInstance().invoke( new NewMoveTask(nextTask) );

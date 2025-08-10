@@ -32,6 +32,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Quaternion;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+import org.firstinspires.ftc.teamcode.Util.Array.ArrayExtra;
 
 import java.util.Arrays;
 
@@ -73,6 +74,10 @@ public class DeviceTest extends LinearOpMode {
 
     public static boolean sendValue = true;
     public static double valueToSend = 0;
+
+    private final int[] readsRed   = new int[11];
+    private final int[] readsGreen = new int[11];
+    private final int[] readsBlue  = new int[11];
 
     @Override
     public void runOpMode() {
@@ -136,9 +141,13 @@ public class DeviceTest extends LinearOpMode {
                         break;
                     case COLOR_SENSOR:
                         AdafruitI2cColorSensor colorSensor = fix((AdafruitI2cColorSensor) hardwareDevice);
-                        telemetry.addData("red", colorSensor.red());
-                        telemetry.addData("green", colorSensor.green());
-                        telemetry.addData("blue", colorSensor.blue());
+                        ArrayExtra.updateLikeBuffer(colorSensor.red()  ,readsRed);
+                        ArrayExtra.updateLikeBuffer(colorSensor.green(),readsGreen);
+                        ArrayExtra.updateLikeBuffer(colorSensor.blue() ,readsBlue);
+
+                        telemetry.addData("red",   ArrayExtra.findMedian(readsRed));
+                        telemetry.addData("green", ArrayExtra.findMedian(readsGreen));
+                        telemetry.addData("blue",  ArrayExtra.findMedian(readsBlue));
                         telemetry.addData("alpha", colorSensor.alpha());
                         telemetry.addData("argb code", Integer.toHexString(colorSensor.argb()));
                         break;

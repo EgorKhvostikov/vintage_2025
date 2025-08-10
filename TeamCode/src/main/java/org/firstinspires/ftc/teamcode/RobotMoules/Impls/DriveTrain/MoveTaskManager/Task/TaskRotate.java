@@ -31,7 +31,7 @@ public class TaskRotate extends MoveTask implements IListener<Boolean> {
         }
 
         if((!isRunOnce || !atAngle)  && timer.seconds() < 0.5){
-            velocity = new Position(-6,0,angle);
+            velocity = new Position(-12,0,angle);
         }else{
             atAngle = false;
             EventBus.getInstance().invoke( new NewMoveTask(nextTask) );
