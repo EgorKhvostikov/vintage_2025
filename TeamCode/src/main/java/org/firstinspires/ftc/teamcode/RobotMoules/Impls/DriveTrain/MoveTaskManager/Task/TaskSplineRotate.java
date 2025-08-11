@@ -6,9 +6,9 @@ import org.firstinspires.ftc.teamcode.RobotMoules.Impls.DriveTrain.Observer.Regi
 import org.firstinspires.ftc.teamcode.RobotMoules.Observer.IListener;
 import org.firstinspires.ftc.teamcode.Util.Math.Position.Position;
 
-public class TaskRotate extends MoveTask implements IListener<Boolean> {
+public class TaskSplineRotate extends MoveTask implements IListener<Boolean> {
 
-    public TaskRotate(double angle, MoveTask nextTask) {
+    public TaskSplineRotate(double angle, MoveTask nextTask) {
         this.angle = angle;
         this.nextTask = nextTask;
         EventBus.getInstance().invoke(new RegisterNewRobotAtAngleListener(this));
@@ -31,7 +31,7 @@ public class TaskRotate extends MoveTask implements IListener<Boolean> {
         }
 
         if((!isRunOnce || !atAngle)  && timer.seconds() < 0.5){
-            velocity = new Position(-6,0,angle);
+            velocity = new Position(6,0,angle);
         }else{
             atAngle = false;
             EventBus.getInstance().invoke( new NewMoveTask(nextTask) );

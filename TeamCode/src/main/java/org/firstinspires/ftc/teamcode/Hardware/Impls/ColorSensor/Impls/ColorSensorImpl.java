@@ -19,9 +19,9 @@ public class ColorSensorImpl implements ColorSensor {
     private final ElapsedTime timer = new ElapsedTime();
     private final ElapsedTime timerA = new ElapsedTime();
     private RgbColorVector state = new RgbColorVector(0,0,0);
-    private final int[] readsRed   = new int[3];
-    private final int[] readsGreen = new int[3];
-    private final int[] readsBlue  = new int[3];
+    private final int[] readsRed   = new int[1];
+    private final int[] readsGreen = new int[1];
+    private final int[] readsBlue  = new int[1];
 
     @Override
     public RgbColorVector getRgbVector() {

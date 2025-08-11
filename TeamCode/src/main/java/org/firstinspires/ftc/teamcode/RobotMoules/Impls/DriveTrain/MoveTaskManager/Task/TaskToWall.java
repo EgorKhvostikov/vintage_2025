@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.AngleListe
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.Gyro.Observer.RegisterNewAngleListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.RegisterNewWallFinderListener;
 import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.WallFinderListener;
+import org.firstinspires.ftc.teamcode.RobotMoules.Impls.WallFinder.Observer.WallFinderStatus;
 import org.firstinspires.ftc.teamcode.Util.Math.Position.Position;
 
 public class TaskToWall extends MoveTask implements AngleListener, WallFinderListener {
@@ -17,17 +18,22 @@ public class TaskToWall extends MoveTask implements AngleListener, WallFinderLis
 
     private boolean isRunOnce = false;
     private double angle = 0;
-    private boolean wallNear = false;
+    private WallFinderStatus wallNear = new WallFinderStatus(false,false,false);
+
     @Override
     public void update() {
         if(!isRunOnce){
             timer.reset();
             isRunOnce = true;
         }
-        if( ((!wallNear && (timer.seconds() < 2.5))) || timer.seconds() < 1 ){
+        if( ((!wallNear.getOr() && (timer.seconds() < 2.5))) || timer.seconds() < 0.5 ){
             velocity = new Position(12 ,0,angle);
         }else{
-            EventBus.getInstance().invoke( new NewMoveTask(new TaskRotate(angle+95*Math.signum(direction) ,new TaskToWall())) ) ;
+            if(wallNear.sonar){
+                EventBus.getInstance().invoke(new NewMoveTask(new TaskSplineRotate(angle + 100*Math.signum(direction), new TaskToWall())));
+            }else {
+                EventBus.getInstance().invoke(new NewMoveTask(new TaskRotate(angle + 100*Math.signum(direction), new TaskToWall())));
+            }
         }
     }
 
@@ -37,7 +43,7 @@ public class TaskToWall extends MoveTask implements AngleListener, WallFinderLis
     }
 
     @Override
-    public void setWallFindState(boolean data) {
+    public void setWallFindState(WallFinderStatus data) {
         wallNear = data;
     }
 }

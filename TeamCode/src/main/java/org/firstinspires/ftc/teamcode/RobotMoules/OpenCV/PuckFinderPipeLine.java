@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PuckFinderPipeLine extends OpenCvPipeline {
-    private static PuckFinderPipeLine Instance = new PuckFinderPipeLine();
+    private static final PuckFinderPipeLine Instance = new PuckFinderPipeLine();
     public static PuckFinderPipeLine getInstance() {
         return Instance;
     }

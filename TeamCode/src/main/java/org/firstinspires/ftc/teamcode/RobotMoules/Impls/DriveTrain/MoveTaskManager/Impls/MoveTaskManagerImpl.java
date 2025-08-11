@@ -34,7 +34,7 @@ public class MoveTaskManagerImpl implements MoveTaskManager, IEventUser {
     }
 
     @Override
-    public void init(){
+    public void subscribeInit(){
         EventBus.getInstance().subscribe(ArriveOnBase.class,this::onEvent);
         EventBus.getInstance().subscribe(NewMoveTask.class,this::onEvent);
     }

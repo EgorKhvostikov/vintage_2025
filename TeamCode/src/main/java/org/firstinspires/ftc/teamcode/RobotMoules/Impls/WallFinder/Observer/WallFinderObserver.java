@@ -16,7 +16,7 @@ public class WallFinderObserver implements IEventUser {
         listeners.remove(l);
     }
 
-    public void notifyListeners(boolean data){
+    public void notifyListeners(WallFinderStatus data){
         listeners.forEach(i-> i.setWallFindState(data));
     }
 
